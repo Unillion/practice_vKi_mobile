@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,21 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Draft">
         <activity
-            android:name=".screens.ResultActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Draft" />
-        <activity
-            android:name=".screens.SecondInputActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Draft" />
-        <activity
-            android:name=".screens.MainInputScreen"
-            android:exported="false"
-            android:theme="@style/Theme.Draft" />
-        <activity android:name=".screens.HistoryActivity" />
-        <activity android:name=".screens.DetailActivity" />
-        <activity
-            android:name=".screens.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Draft">
@@ -33,6 +21,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.MainScreen"
+            android:exported="true"
+            android:label="@string/title_activity_main_screen"
+            android:theme="@style/Theme.Draft">
+        </activity>
+        <activity
+            android:name=".ui.RegisterScreen"
+            android:exported="false"
+            android:label="@string/title_activity_register_screen"
+            android:theme="@style/Theme.Draft" />
+        <activity
+            android:name=".ui.LoginScreen"
+            android:exported="false"
+            android:label="@string/title_activity_login_screen"
+            android:theme="@style/Theme.Draft" />
     </application>
 
 </manifest>
