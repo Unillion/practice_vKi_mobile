@@ -68,7 +68,7 @@ class RegisterViewModel(
 
             if (result.isSuccess) {
                 _uiState.value = _uiState.value.copy(
-                    groups = (result.getOrNull() ?: emptyList()) as List<GroupDto>,
+                    groups = (result.getOrNull() ?: emptyList()),
                     isLoadingGroups = false
                 )
             } else {

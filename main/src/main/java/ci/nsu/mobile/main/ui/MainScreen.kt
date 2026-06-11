@@ -102,7 +102,7 @@ fun MainScreen(
 }
 
 @Composable
-fun UserCard(user: UserDto) {
+fun UserCard(user: ci.nsu.mobile.main.data.models.UserDto) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -111,20 +111,37 @@ fun UserCard(user: UserDto) {
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
+            // Обработка null для person и его полей
+            val fullName = buildString {
+                user.person?.let { person ->
+                    append(person.lastName ?: "")
+                    if (person.lastName != null && person.firstName != null) append(" ")
+                    append(person.firstName ?: "")
+                    if (person.middleName != null && person.middleName!!.isNotEmpty()) {
+                        append(" ")
+                        append(person.middleName)
+                    }
+                }
+                if (isEmpty()) append("Без имени")
+            }
+
             Text(
-                text = "${user.person?.lastName} ${user.person?.firstName} ${user.person?.middleName}",
+                text = fullName,
                 style = MaterialTheme.typography.titleMedium
             )
+
             Text(
-                text = "Логин: ${user.login}",
+                text = "Логин: ${user.login ?: "Не указан"}",
                 style = MaterialTheme.typography.bodySmall
             )
+
             Text(
-                text = "Email: ${user.email}",
+                text = "Email: ${user.email ?: "Не указан"}",
                 style = MaterialTheme.typography.bodySmall
             )
+
             Text(
-                text = "Телефон: ${user.phoneNumber}",
+                text = "Телефон: ${user.phoneNumber ?: "Не указан"}",
                 style = MaterialTheme.typography.bodySmall
             )
         }

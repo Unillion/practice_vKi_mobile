@@ -166,12 +166,12 @@ fun RegisterScreen(
 
         // Group dropdown
         var expanded by remember { mutableStateOf(false) }
-        val selectedGroup = uiState.groups.find { it.id == uiState.selectedGroupId }
+        val selectedGroup = uiState.groups.find { it.groupId == uiState.selectedGroupId }
 
         ExposedDropdownMenuBox(
             expanded = expanded, onExpandedChange = { expanded = it }) {
             OutlinedTextField(
-                value = selectedGroup?.name ?: "",
+                value = selectedGroup?.groupName ?: "",
                 onValueChange = {},
                 readOnly = true,
                 label = { Text("Группа") },
@@ -189,10 +189,17 @@ fun RegisterScreen(
                     DropdownMenuItem(text = { Text(uiState.groupsError!!) }, onClick = { })
                 } else {
                     uiState.groups.forEach { group ->
-                        DropdownMenuItem(text = { Text(group.name) }, onClick = {
-                            viewModel.updateSelectedGroup(group.id)
-                            expanded = false
-                        })
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = group.groupName ?: "Группа ${group.groupId}"
+                                )
+                            },
+                            onClick = {
+                                viewModel.updateSelectedGroup(group.groupId)
+                                expanded = false
+                            }
+                        )
                     }
                 }
             }
